@@ -40,7 +40,14 @@ linfit = minimize(linear, initialGuess, method="Nelder-Mead", options={'disp': T
 humpfit = minimize(hump, initialGuess, method="Nelder-Mead", options={'disp': True}, args=data)
 
 
-print(humpfit.x)
+D=2*(constfit.fun - linfit.fun)
+print("linear over const fit")
+print(1-chi2.cdf(x=D, df=1))
 
-D=2*(const.fun - linfit.fun)
-1-chi2.cdf(x=D, df=1)
+D=2*(humpfit.fun - linfit.fun)
+print("linear over hump fit")
+print(1-chi2.cdf(x=D, df=1))
+
+D=2*(constfit.fun - humpfit.fun)
+print("hump over const fit")
+print(1-chi2.cdf(x=D, df=2))

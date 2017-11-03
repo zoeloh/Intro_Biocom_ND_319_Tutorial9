@@ -39,4 +39,37 @@ linfit.fun
 nullfit.fun
 
 D=2*(nullfit.fun - linfit.fun)
-1-chi2.cdf(x=D, df=1)
+print("M124K P value:")
+print(1-chi2.cdf(x=D, df=1))
+
+subset=data.loc[data.mutation.isin(['0','2']),:]
+
+initialLinGuess = numpy.array([1,1,1])
+linfit = minimize(linear, initialLinGuess, method="Nelder-Mead", options={'disp': True}, args=subset)
+
+initialNullGuess = numpy.array([1,1])
+nullfit = minimize(nullH, initialNullGuess, method="Nelder-Mead", options={'disp': True}, args=subset)
+
+linfit.fun
+nullfit.fun
+
+D=2*(nullfit.fun - linfit.fun)
+print("V456D P value:")
+print(1-chi2.cdf(x=D, df=1))
+
+subset=data.loc[data.mutation.isin(['0','3']),:]
+
+initialLinGuess = numpy.array([1,1,1])
+linfit = minimize(linear, initialLinGuess, method="Nelder-Mead", options={'disp': True}, args=subset)
+
+initialNullGuess = numpy.array([1,1])
+nullfit = minimize(nullH, initialNullGuess, method="Nelder-Mead", options={'disp': True}, args=subset)
+
+linfit.fun
+nullfit.fun
+
+D=2*(nullfit.fun - linfit.fun)
+print("I213N P value:")
+print(1-chi2.cdf(x=D, df=1))
+
+
